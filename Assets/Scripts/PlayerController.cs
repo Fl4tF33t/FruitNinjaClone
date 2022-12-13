@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
                 GameManager.gameIsOver = false;
                 SceneManager.LoadScene(0);
             }
+
         }
 
     }

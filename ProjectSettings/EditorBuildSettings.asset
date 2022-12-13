@@ -9,5 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/FruitNinja.unity
     guid: c850ee8c3b14cc8459e7e186857cf567
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 5e4ce08acee960646bd7e687ee6cce22,
+      type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 442c87ba66043b54c9b4d4ed7dc98775, type: 2}

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject[] fruitPrefabs;
     [SerializeField] GameObject gameOver;
+    [SerializeField] GameObject gameWon;
     [SerializeField] GameObject[] fruits;
 
     [SerializeField] AudioSource gameMusic;
@@ -44,6 +45,10 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
+        if(score >= 10)
+        {
+            GameWon();
+        }
     }
 
     private void EndGame()
@@ -51,12 +56,31 @@ public class GameManager : MonoBehaviour
         fruits = GameObject.FindGameObjectsWithTag("Fruit");
         CancelInvoke("FruitSpawn");
         lives = 3;
+        score = 0;
         
         for (int i = 0; i < fruits.Length; i++)
         {
             Destroy(fruits[i]);
         }
         gameOver.SetActive(true);
+        gameMusic.Stop();
+
+        endGameMusic.Play();
+        gameIsOver = true;
+    }
+
+    void GameWon()
+    {
+        fruits = GameObject.FindGameObjectsWithTag("Fruit");
+        CancelInvoke("FruitSpawn");
+        lives = 3;
+        score = 0;
+
+        for (int i = 0; i < fruits.Length; i++)
+        {
+            Destroy(fruits[i]);
+        }
+        gameWon.SetActive(true);
         gameMusic.Stop();
 
         endGameMusic.Play();

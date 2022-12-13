@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject playButton;
     [SerializeField] GameObject settingsButton;
     [SerializeField] GameObject closeButton;
+    [SerializeField] GameObject notifyButton;
+
     [SerializeField] Slider volumeSlider;
     [SerializeField] Slider scoreSlider;
 
@@ -47,6 +49,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
         settingsButton.SetActive(true);
         closeButton.SetActive(false);
+        notifyButton.SetActive(false);
         playButton.SetActive(!playButton.activeSelf);
         pauseButton.SetActive(!pauseButton.activeSelf);
         volumeSlider.transform.gameObject.SetActive(false);
@@ -57,6 +60,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         playButton.SetActive(true);
         pauseButton.SetActive(false);
+        notifyButton.SetActive(true);
         settingsButton.SetActive(!settingsButton.activeSelf);
         closeButton.SetActive(!closeButton.activeSelf);
         volumeSlider.transform.gameObject.SetActive(true);
@@ -67,6 +71,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
         playButton.SetActive(false);
         pauseButton.SetActive(true);
+        notifyButton.SetActive(false);
         closeButton.SetActive(!closeButton.activeSelf);
         settingsButton.SetActive(!settingsButton.activeSelf);
         volumeSlider.transform.gameObject.SetActive(false);
