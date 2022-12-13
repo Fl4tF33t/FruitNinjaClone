@@ -39,8 +39,8 @@ namespace Notification
             AndroidNotification androidNotification = new AndroidNotification ()
             {
                 Title = "Hello!",
-                Text = "Check this out!",
-                FireTime = DateTime.Now.AddSeconds(30.0)
+                Text = "Come back and play Fruit Slicer!",
+                FireTime = DateTime.Now.AddSeconds(20.0)
             };
             
             AndroidNotificationCenter.CancelNotification((int)NotificationID.PauseNotification);
@@ -52,7 +52,7 @@ namespace Notification
             AndroidNotification androidNotification = new AndroidNotification ()
             {
                 Title = "Settings button tapped",
-                Text = "You did press it, didn't you?",
+                Text = "Here is my notifcation for you to KEEP PLAYING :)",
                 FireTime = DateTime.Now.AddSeconds(2.0)
             };
 
