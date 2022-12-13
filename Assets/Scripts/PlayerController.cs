@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,11 +11,14 @@ public class PlayerController : MonoBehaviour
     public Vector3 playerPosition;
     public AudioSource audioSource;
     public AudioClip sliceSound;
+    public AudioClip bombSound;
+
+    GameManager gmInfo;
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        gmInfo = GetComponent<GameManager>();
     }
 
 
@@ -36,24 +40,29 @@ public class PlayerController : MonoBehaviour
 
                 if (nearestFruitToTouchPosition != null && Time.timeScale == 1)
                 {
-                    audioSource.PlayOneShot(sliceSound);
+                    
                     if(nearestFruitToTouchPosition.name != "Bomb(Clone)")
                     {
                         
                         Destroy(nearestFruitToTouchPosition);
-                        Instantiate(splitFruit, nearestFruitToTouchPosition.transform.position, nearestFruitToTouchPosition.transform.rotation);
-
+                        Instantiate(splitFruit, gmInfo.SpawnLocation(), Quaternion.identity);
+                        audioSource.PlayOneShot(sliceSound);
                         GameManager.score++;
                     }else if(nearestFruitToTouchPosition.name == "Bomb(Clone)")
                     {
                       
                         Destroy(nearestFruitToTouchPosition);
                         GameManager.lives--;
+                        audioSource.PlayOneShot(bombSound);
                     }
-
 
                 }
 
+            }
+            if(touch.phase == TouchPhase.Began && GameManager.gameIsOver == true)
+            {
+                GameManager.gameIsOver = false;
+                SceneManager.LoadScene(0);
             }
         }
 

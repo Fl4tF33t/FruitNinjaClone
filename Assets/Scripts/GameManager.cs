@@ -5,13 +5,21 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject[] fruitPrefabs;
+    [SerializeField] GameObject gameOver;
+    [SerializeField] GameObject[] fruits;
+
+    [SerializeField] AudioSource gameMusic;
+    AudioSource endGameMusic;
 
     public static int score;
     public static int lives = 3;
 
+    public static bool gameIsOver = false;
+
     // Start is called before the first frame update
     public void Start()
     {
+        endGameMusic = GetComponent<AudioSource>();
         InvokeRepeating("FruitSpawn", 1, 1);
     }
 
@@ -21,7 +29,7 @@ public class GameManager : MonoBehaviour
         Instantiate(fruitPrefabs[randomIndex], SpawnLocation(), /*Quaternion.Euler(-90, 180, 0)*/ Quaternion.identity);
     }
 
-    Vector3 SpawnLocation()
+    public Vector3 SpawnLocation()
     {
         Vector3 spawnLocation;
         float randomFloat = Random.Range(-10, 10);
@@ -40,6 +48,18 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        print("you lost");
+        fruits = GameObject.FindGameObjectsWithTag("Fruit");
+        CancelInvoke("FruitSpawn");
+        lives = 3;
+        
+        for (int i = 0; i < fruits.Length; i++)
+        {
+            Destroy(fruits[i]);
+        }
+        gameOver.SetActive(true);
+        gameMusic.Stop();
+
+        endGameMusic.Play();
+        gameIsOver = true;
     }
 }
